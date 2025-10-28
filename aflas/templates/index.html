@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电商商品多条件筛选系统</title>
+    <!-- 引入Bootstrap样式 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入自定义CSS文件 -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<!-- 1. 添加welcome-body类，继承统一背景样式 -->
+<body class="welcome-body">
+    <!-- 2. 添加统一的透明容器，与welcome.html的welcome-container对齐 -->
+    <div class="welcome-container">
+        <!-- 3. 主标题改为统一的渐变色闪烁样式 -->
+        <h1 class="welcome-title mb-5">电商商品多条件筛选系统</h1>
+
+        <!-- 原有筛选功能区：包裹在统一容器内，保留所有功能逻辑 -->
+        <div class="filter-section">
+            <h3>筛选条件</h3>
+            <form id="filterForm">
+                <div class="row g-3">
+                    <!-- 商品类别 -->
+                    <div class="col-md-4">
+                        <label class="form-label">商品类别（可多选）</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="category" value="家电" id="cat1">
+                            <label class="form-check-label" for="cat1">家电</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="category" value="服装" id="cat2">
+                            <label class="form-check-label" for="cat2">服装</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="category" value="食品" id="cat3">
+                            <label class="form-check-label" for="cat3">食品</label>
+                        </div>
+                    </div>
+
+                    <!-- 价格区间 -->
+                    <div class="col-md-4">
+                        <label for="priceRange" class="form-label">价格区间</label>
+                        <select class="form-select" id="priceRange" name="price_range">
+                            <option value="">请选择价格区间</option>
+                            <option value="0-100">0-100元</option>
+                            <option value="100-500">100-500元</option>
+                            <option value="500+">500元以上</option>
+                        </select>
+                    </div>
+
+                    <!-- 是否包邮 -->
+                    <div class="col-md-4">
+                        <label class="form-label">是否包邮</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="free_shipping" value="" id="shippingAll" checked>
+                            <label class="form-check-label" for="shippingAll">全部</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="free_shipping" value="yes" id="shippingYes">
+                            <label class="form-check-label" for="shippingYes">是</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="free_shipping" value="no" id="shippingNo">
+                            <label class="form-check-label" for="shippingNo">否</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 集合运算表达式 -->
+        <div class="expression-section mt-4">
+            <h3>集合运算表达式</h3>
+            <div class="expression" id="expression">全集合</div>
+        </div>
+
+        <!-- 原始商品集合（折叠面板） -->
+        <div class="mb-4 mt-4">
+            <div class="accordion" id="allProductsAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingAll">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAll" aria-expanded="false" aria-controls="collapseAll">
+                            原始商品集合 (共 {{ products|length }} 件)
+                        </button>
+                    </h2>
+                    <div id="collapseAll" class="accordion-collapse collapse" aria-labelledby="headingAll" data-bs-parent="#allProductsAccordion">
+                        <div class="accordion-body">
+                            <div class="row" id="allProducts">
+                                {% for product in products %}
+                                <div class="col-md-3 mb-3">
+                                    <div class="card product-card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ product.name }}</h5>
+                                            <p class="card-text">
+                                                类别: {{ product.category }}<br>
+                                                价格: {{ product.price }}元<br>
+                                                包邮: {% if product.free_shipping %}是{% else %}否{% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 筛选结果 -->
+        <div class="mt-4">
+            <h3>筛选结果</h3>
+            <div class="row" id="filteredProducts">
+                <!-- 初始显示所有商品 -->
+                {% for product in products %}
+                <div class="col-md-3 mb-3">
+                    <div class="card product-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">
+                                类别: {{ product.category }}<br>
+                                价格: {{ product.price }}元<br>
+                                包邮: {% if product.free_shipping %}是{% else %}否{% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 保留原有脚本引用 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+/* 欢迎页面样式（通用，供两个页面共用） */
+.welcome-body {
+  background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px 0; /* 给筛选页面上下留间距，避免内容贴边 */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* 筛选页面内容从上往下排，不居中 */
+  text-align: center;
+  overflow-x: hidden; /* 避免横向滚动 */
+}
+/* 欢迎页面样式（通用，供两个页面共用） */
+.welcome-body {
+  /* 原有代码保持不变 */
+}
+
+/* 统一容器样式（两个页面共用） */
+.welcome-container {
+  /* 原有代码保持不变 */
+}
+
+/* 统一标题样式（两个页面共用） */
+.welcome-title {
+  /* 原有代码保持不变 */
+}
+
+/* 系统标语样式 */
+.system-slogan {
+    color: #fff;
+    font-size: 1.2em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 登录/注册按钮样式优化 */
+#loginBtn, #registerBtn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+#loginBtn {
+    background-color: #4ecdc4;
+    border: none;
+}
+
+#loginBtn:hover {
+    background-color: #3dbbba;
+    transform: scale(1.05);
+}
+
+#registerBtn {
+    background-color: #6c757d;
+    border: none;
+}
+
+#registerBtn:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+/* 统一容器样式（两个页面共用） */
+.welcome-container {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1); /* 半透明白色，比完全透明更清晰 */
+  backdrop-filter: blur(10px); /* 毛玻璃效果，提升质感 */
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 1200px; /* 限制最大宽度，避免大屏下内容过宽 */
+  margin: 30px auto;
+}
+
+/* 统一标题样式（两个页面共用） */
+.welcome-title {
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: flash 2s linear infinite;
+  font-size: 3.5em; /* 适配筛选页面，比原来的5em小，避免占满屏幕 */
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* 统一按钮样式（两个页面共用） */
+.btn-primary {
+  padding: 15px 40px;
+  font-size: 1.5em;
+  border-radius: 50px;
+  transition: background-color 0.3s, transform 0.3s;
+  border: none; /* 去掉默认边框 */
+  background-color: #4ecdc4; /* 与背景渐变配色呼应 */
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background-color: #3dbbba; /*  hover时加深颜色 */
+}
+
+/* 标题闪烁动画（通用） */
+@keyframes flash {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.5); }
+  100% { filter: brightness(1); }
+}
+
+/* 产品卡片悬停效果（保留原有功能） */
+.product-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: rgba(255, 255, 255, 0.8); /* 卡片半透明，与容器呼应 */
+  border: none; /* 去掉默认卡片边框 */
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 筛选区域样式（优化，与统一风格适配） */
+.filter-section {
+  background-color: rgba(255, 255, 255, 0.7); /* 半透明背景，替代原来的#f8f9fa */
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 加轻微阴影，提升层次 */
+}
+
+/* 集合表达式样式（优化） */
+.expression {
+  font-style: italic;
+  color: #333; /* 深色文字，在半透明背景上更清晰 */
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.7); /* 与筛选区背景一致 */
+  border-radius: 0.5rem;
+}
+
+/* 折叠面板样式（适配统一风格） */
+.accordion-item {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 0.5rem !important;
+  margin-bottom: 10px;
+}
+.accordion-button {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 0.5rem !important;
+}
+.accordion-button:not(.collapsed) {
+  color: #4ecdc4; /* 与按钮颜色呼应 */
+  background-color: rgba(255, 255, 255, 0.9);
+}
